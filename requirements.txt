@@ -1,0 +1,9 @@
+# OCR / 资料处理
+rapidocr_onnxruntime==1.3.24
+Pillow>=10.0
+psycopg2-binary>=2.9
+
+# 备注：
+# - Dify 自身的依赖由其 uv venv 管理，不在此文件
+# - Chroma 用 Dify api venv 内的 chromadb 0.5.20
+# - 本地 Embedding(bge-m3) 环境需自行安装 torch/transformers，见 README

@@ -1,0 +1,22 @@
+# 放在 dify/docker/docker-compose.override.yaml（与 docker-compose.yaml 同目录）。
+# docker compose 会自动合并本文件。
+#
+# 1. worker/api 的 nofile 上调：批量索引大语料时，默认 1024 会导致
+#    "Too many open files" 大批文档报错（Dify 默认不设置 ulimits）。
+# 2. 把 PostgreSQL 端口发布到本机回环，供 eval/exact_baseline.py 直连
+#    读取分段（不暴露到公网）。
+
+services:
+  worker:
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+  api:
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+  db_postgres:
+    ports:
+      - "127.0.0.1:5432:5432"
